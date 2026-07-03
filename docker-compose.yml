@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-pokeprecio}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pokeprecio}
+      POSTGRES_DB: ${POSTGRES_DB:-pokeprecio}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pokeprecio"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5432:5432"
+
+  api:
+    build: ./backend
+    command: sh -c "alembic upgrade head && uvicorn app.api.main:app --host 0.0.0.0 --port 8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-pokeprecio}:${POSTGRES_PASSWORD:-pokeprecio}@postgres:5432/${POSTGRES_DB:-pokeprecio}
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-change-me}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  scraper-worker:
+    build: ./backend
+    command: python -m app.worker
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-pokeprecio}:${POSTGRES_PASSWORD:-pokeprecio}@postgres:5432/${POSTGRES_DB:-pokeprecio}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_ADMIN_CHAT_ID: ${TELEGRAM_ADMIN_CHAT_ID:-}
+    volumes:
+      - ./backend/stores:/app/stores:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      api:
+        condition: service_started
+
+  bot:
+    build: ./backend
+    command: python -m app.telegram.bot
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-pokeprecio}:${POSTGRES_PASSWORD:-pokeprecio}@postgres:5432/${POSTGRES_DB:-pokeprecio}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://192.168.1.86:8000}
+    environment:
+      # SSR dentro de Docker: el contenedor frontend llega al contenedor api por nombre de servicio
+      API_INTERNAL_URL: http://api:8000
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://192.168.1.86:8000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
