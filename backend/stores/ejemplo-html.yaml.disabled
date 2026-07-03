@@ -1,0 +1,34 @@
+# Tienda de ejemplo — plataforma HTML (fallback FRÁGIL).
+# Renombrar a .yaml para activar. Solo para tiendas que no son Shopify ni WooCommerce.
+# Los selectores se rompen cuando la tienda cambia su maquetación: vigilar las
+# alarmas de "0 productos" en el canal admin.
+
+nombre: Tienda Ejemplo HTML
+slug: ejemplo-html
+base_url: https://otra-tienda.cl
+plataforma: html
+
+# categoría interna -> ruta de la página de categoría
+mapeo_categorias:
+  etb: /categoria/elite-trainer-boxes
+  booster_box: /categoria/displays
+
+# Selector CSS del badge de preventa dentro de la tarjeta de producto
+preventa_marker: ".badge-preventa"
+
+max_price_por_categoria:
+  etb: 120000
+  booster_box: 350000
+
+idioma_default: ES
+
+selectores:
+  product: ".product-card"
+  name: ".product-title"
+  price: ".price-regular"
+  sale_price: ".price-sale"
+  url: "a.product-link"
+  image: "img.product-image"
+  out_of_stock: ".badge-agotado"
+  preorder_badge: ".badge-preventa"
+  next_page: "a.pagination-next"

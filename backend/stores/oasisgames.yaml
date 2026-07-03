@@ -1,0 +1,19 @@
+nombre: Oasis Games
+slug: oasisgames
+base_url: https://oasisgames.cl
+plataforma: shopify
+
+mapeo_categorias:
+  booster_box: back-end-booster-box-pokemon
+  booster_pack: back-end-booster-packs-pokemon
+  todos_pokemon: back-end-pokemon-sealed
+  preventas: back-end-all-preorders
+
+preventa_marker: preventa
+
+max_price_por_categoria:
+  booster_box: 400000
+  booster_pack: 25000
+  todos_pokemon: 500000
+
+idioma_default: unknown

@@ -1,0 +1,36 @@
+nombre: colectorcenter.cl
+slug: colectorcenter-cl
+base_url: https://collectorcenter.cl
+plataforma: shopify
+
+mapeo_categorias:
+  etb: elite-trainer-box
+  booster_box: booster-box
+  booster_pack: booster-pack
+  booster_bundle: booster-bundle
+  collection_box: premium-collection
+  tin: tin-y-minitin
+  blisters: blisters
+  accesorios: accesorios-1
+  protectores: protectores
+  pokemon_center: pokemon-center
+  todos_pokemon: ver-todo-pokemon
+  preventas: preventas
+  preventas_todo: ver-todo-preventas
+
+# Tag de Shopify para preventas estructuradas (confianza alta)
+preventa_marker: preventa
+
+# La tienda tiene colecciones separadas de preventa — también se escanean
+# a través del handle "preventas" y "ver-todo-preventas"
+
+max_price_por_categoria:
+  booster_pack: 25000
+  blisters: 40000
+  booster_bundle: 80000
+  etb: 150000
+  booster_box: 400000
+  collection_box: 250000
+  tin: 60000
+
+idioma_default: unknown

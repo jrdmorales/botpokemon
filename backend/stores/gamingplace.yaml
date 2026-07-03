@@ -1,0 +1,15 @@
+nombre: Gaming Place
+slug: gamingplace
+base_url: https://gamingplace.cl
+plataforma: shopify
+
+mapeo_categorias:
+  todos_pokemon: pokemon-tcg
+  accesorios: accesorios-tcg
+
+preventa_marker: preventa
+
+max_price_por_categoria:
+  todos_pokemon: 500000
+
+idioma_default: unknown

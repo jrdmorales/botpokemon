@@ -1,0 +1,23 @@
+nombre: HunterCard TCG
+slug: huntercardtcg
+base_url: https://www.huntercardtcg.com
+plataforma: woocommerce
+
+# IDs de categorías WooCommerce (no slugs — la Store API filtra por ID)
+mapeo_categorias:
+  etb: "109"
+  booster_box: "110"
+  booster_pack: "111"
+  bundle: "502"
+  blisters: "503"
+
+preventa_marker: preventa
+
+max_price_por_categoria:
+  booster_pack: 25000
+  blisters: 40000
+  bundle: 80000
+  etb: 150000
+  booster_box: 400000
+
+idioma_default: unknown

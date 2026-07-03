@@ -1,0 +1,18 @@
+nombre: AFKStore
+slug: afkstore
+base_url: https://afkstore.cl
+plataforma: shopify
+
+mapeo_categorias:
+  todos_pokemon: pokemon-productos
+  pokemon_en: comprar-cartas-pokemon-en-ingles
+  pokemon_es: cartas-pokemon-en-espanol
+
+preventa_marker: preventa
+
+max_price_por_categoria:
+  todos_pokemon: 500000
+  pokemon_en: 500000
+  pokemon_es: 500000
+
+idioma_default: unknown

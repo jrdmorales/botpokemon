@@ -1,0 +1,19 @@
+nombre: Arcadia Collects
+slug: arcadiacollects
+base_url: https://arcadiacollects.cl
+plataforma: shopify
+
+mapeo_categorias:
+  booster_box: booster
+  collection_box: box
+  bundle: bundle
+  preventas: lanzamiento
+
+preventa_marker: preventa
+
+max_price_por_categoria:
+  booster_box: 500000
+  collection_box: 300000
+  bundle: 150000
+
+idioma_default: unknown
